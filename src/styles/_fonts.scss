@@ -1,0 +1,5 @@
+@use "./mixins" as *;
+
+@include create-font("inter", 400);
+@include create-font("inter", 500);
+@include create-font("inter", 700);
