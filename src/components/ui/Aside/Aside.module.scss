@@ -1,3 +1,5 @@
+@use "../../../styles/variables" as *;
+
 .aside {
   position: fixed;
   top: 50%;
@@ -11,6 +13,10 @@
   flex-direction: column;
   gap: 0.5rem;
   list-style: none;
+  background: rgba($gold, 0.25);
+  border: 1px solid $yellow;
+  padding: 1rem 0.75rem;
+  border-radius: 999px;
 }
 
 .li {
@@ -30,8 +36,8 @@
   }
 }
 
-.icon,
-.span {
+.icon {
+  color: $yellow;
   transition: all 0.2s;
 }
 
@@ -40,6 +46,10 @@
   position: fixed;
   right: 75%;
   font-weight: 500;
+  background: rgba($gold, 0.35);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
   pointer-events: none;
+  user-select: none;
   transition: all 0.2s;
 }
