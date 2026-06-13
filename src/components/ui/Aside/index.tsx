@@ -12,7 +12,7 @@ import styles from "./Aside.module.scss";
 export const Aside = () => {
   const items: AsideItem[] = [
     {
-      name: "Home",
+      name: "Início",
       path: "/",
       icon: House,
     },
