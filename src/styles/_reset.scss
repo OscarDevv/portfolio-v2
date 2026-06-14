@@ -16,3 +16,12 @@ body {
   background: v.$dark;
   color: v.$white;
 }
+
+#root {
+  display: grid;
+  grid-template-columns: 1fr 82px; // 82 é o resultado do calculo dos 32px de distância do aside na lateral direita e da sua largura e 50px
+  grid-template-rows: calc(
+    100vh - 4rem
+  ); // Esse 4rem é o 2rem do padding de cima e do de baixo, evitando existir a scrollbar quando o conteúdo conseguir encaixar na tela inteira
+  padding: 2rem;
+}
