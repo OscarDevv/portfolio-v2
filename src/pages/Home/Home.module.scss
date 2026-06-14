@@ -1,0 +1,56 @@
+@use "../../styles/variables" as *;
+
+.p,
+.h1,
+.h2 {
+  text-align: center;
+}
+
+.p {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+
+  .span {
+    display: inline-block;
+    transform-origin: 70% 70%;
+  }
+}
+
+.h1 {
+  font-size: 4.5rem;
+  margin: 4rem;
+  background: linear-gradient(to left, $gold, $yellow);
+  color: transparent;
+  background-clip: text;
+}
+
+.h2 {
+  font-size: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 0;
+  margin-top: 4rem;
+}
+
+@media (max-width: 950px) {
+  .h1 {
+    margin: 2rem 0;
+    font-size: 3.5rem;
+  }
+
+  .buttonContainer {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 625px) {
+  .h1 {
+    font-size: 2.5rem;
+  }
+}

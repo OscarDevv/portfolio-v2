@@ -1,0 +1,28 @@
+@use "../../../styles/variables" as *;
+
+.button {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  padding: 0.9rem 2rem;
+  background: $yellow;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $gold;
+  }
+
+  &:focus {
+    filter: brightness(80%);
+  }
+}
+
+@media (max-width: 625px) {
+  .button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+}
