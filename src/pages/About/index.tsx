@@ -1,9 +1,63 @@
 import pfp from "../../assets/images/Foto-Perfil.jpeg";
 import { useScrambleText } from "../../hooks/useScrambleText";
 import styles from "./About.module.scss";
+import type { Language } from "./About.types";
+import {
+  SiGit,
+  SiJavascript,
+  SiReact,
+  SiSass,
+  SiTailwindcss,
+  SiTypescript,
+  SiVite,
+  SiVuedotjs,
+} from "react-icons/si";
 
 export const About = () => {
   const name = useScrambleText("OSCAR", 100);
+
+  const languages: Language[] = [
+    {
+      name: "React",
+      icon: SiReact,
+      color: "cyan",
+    },
+    {
+      name: "JavaScript",
+      icon: SiJavascript,
+      color: "yellow",
+    },
+    {
+      name: "TypeScript",
+      icon: SiTypescript,
+      color: "cyan",
+    },
+    {
+      name: "Git",
+      icon: SiGit,
+      color: "orange",
+    },
+    {
+      name: "Vite",
+      icon: SiVite,
+      color: "purple",
+    },
+    {
+      name: "SCSS",
+      icon: SiSass,
+      color: "pink",
+    },
+    {
+      name: "TailwindCSS",
+      icon: SiTailwindcss,
+      color: "cyan",
+    },
+    {
+      name: "Vue",
+      icon: SiVuedotjs,
+      color: "green",
+    },
+  ];
 
   return (
     <>
@@ -33,6 +87,18 @@ export const About = () => {
             vez mais como desenvolvedor e explorar tecnologias como Java e
             Spring Boot no futuro.
           </p>
+
+          <ul>
+            {languages.map((lang, index) => {
+              const Icon = lang.icon;
+
+              return (
+                <li key={index}>
+                  <Icon style={{ color: lang.color }} />
+                </li>
+              );
+            })}
+          </ul>
         </section>
       </div>
     </>
