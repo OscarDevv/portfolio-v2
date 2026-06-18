@@ -10,6 +10,7 @@
   width: 100%;
   border-radius: 25px;
   border: 2px solid $gold;
+  margin-bottom: 1rem;
   transition:
     box-shadow 0.3s,
     transform 0.2s;
@@ -24,8 +25,18 @@
   }
 }
 
-.content {
+.name {
+  color: $yellow;
+  font-size: 3rem;
+}
+
+.contentContainer {
   margin-bottom: 2rem;
+}
+
+.content {
+  line-height: 135%;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 950px) {
