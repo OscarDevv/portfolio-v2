@@ -1,0 +1,122 @@
+@use "../../styles/variables" as *;
+
+.container {
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+  gap: 2rem;
+}
+
+.pfp {
+  width: 100%;
+  border-radius: 25px;
+  border: 2px solid $gold;
+  margin-bottom: 1rem;
+  transition:
+    box-shadow 0.3s,
+    transform 0.2s;
+
+  &:hover {
+    box-shadow:
+      -5px -5px 25px $gold,
+      5px -5px 25px $gold,
+      -5px 5px 25px $gold,
+      5px 5px 25px $gold;
+    transform: scale(0.95);
+  }
+}
+
+.name {
+  color: $yellow;
+  font-size: 3rem;
+}
+
+.contentContainer {
+  margin-bottom: 2rem;
+}
+
+.content {
+  line-height: 135%;
+  margin-bottom: 1.5rem;
+}
+
+.errorHeading,
+.techHeading {
+  margin-bottom: 1rem;
+}
+
+.div {
+  margin-top: 1rem;
+}
+
+.toolColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.75rem;
+  color: $white;
+  font-size: 1.1rem;
+}
+
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    background: rgba($dark, 0.4);
+    border: 1px solid rgba($gold, 0.3);
+    color: $white;
+    font-size: 1.15rem;
+
+    &:hover .span {
+      opacity: 1;
+      bottom: 110%;
+    }
+  }
+}
+
+.span {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  opacity: 0;
+  background: rgba($gold, 0.5);
+  padding: 0.25rem 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+@media (max-width: 950px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 625px) {
+  .container {
+    grid-template-columns: auto;
+  }
+
+  .pfp:hover {
+    box-shadow: none;
+  }
+}
