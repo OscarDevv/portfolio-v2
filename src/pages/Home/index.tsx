@@ -3,7 +3,7 @@ import styles from "./Home.module.scss";
 import { Button } from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
+export default function Home() {
   const titleContent = useWriteText(
     "Desenvolvendo interfaces modernas e criativas.",
     20,
@@ -30,4 +30,4 @@ export const Home = () => {
       </div>
     </>
   );
-};
+}

@@ -1,5 +1,3 @@
-export const Projects = () => {
-  return (
-    <p>Projects</p>
-  )
+export default function Projects() {
+  return <p>Projects</p>;
 }

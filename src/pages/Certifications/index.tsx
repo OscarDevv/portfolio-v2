@@ -1,5 +1,3 @@
-export const Certifications = () => {
-  return (
-    <p>Certifications</p>
-  )
+export default function Certifications() {
+  return <p>Certifications</p>;
 }

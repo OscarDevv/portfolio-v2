@@ -6,7 +6,7 @@ import styles from "./About.module.scss";
 import { IconMap, type IconKey, type JSONResponse } from "./About.types";
 import { Button } from "../../components/ui/Button";
 
-export const About = () => {
+export default function About() {
   const name = useScrambleText("OSCAR", 100);
   const [tools, setTools] = useState<JSONResponse>();
 
@@ -143,4 +143,4 @@ export const About = () => {
       </div>
     </>
   );
-};
+}
