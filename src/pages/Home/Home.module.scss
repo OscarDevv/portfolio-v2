@@ -15,6 +15,25 @@
     display: inline-block;
     transform-origin: 70% 70%;
   }
+
+  &:hover .span {
+    animation: wave 0.75s ease;
+  }
+}
+
+@mixin rotate($percent, $num) {
+  #{$percent}% {
+    transform: rotate(#{$num}deg);
+  }
+}
+
+@keyframes wave {
+  @include rotate(0, 0);
+  @include rotate(20, 20);
+  @include rotate(40, -10);
+  @include rotate(60, 20);
+  @include rotate(80, -10);
+  @include rotate(100, 0);
 }
 
 .h1 {
