@@ -4,6 +4,7 @@ import { Container } from "../../components/ui/Container";
 import { useScrambleText } from "../../hooks/useScrambleText";
 import styles from "./About.module.scss";
 import { IconMap, type IconKey, type JSONResponse } from "./About.types";
+import { Button } from "../../components/ui/Button";
 
 export const About = () => {
   const name = useScrambleText("OSCAR", 100);
@@ -62,63 +63,82 @@ export const About = () => {
             Spring Boot no futuro.
           </p>
 
-          <h2>Tecnologias</h2>
+          <h2 className={styles.techHeading}>Tecnologias</h2>
 
-          <div className={styles.div}>
-            <Container className={styles.toolColumn}>
-              <h2 className={styles.sectionTitle}>Front-End</h2>
+          {!tools && (
+            <>
+              <h3 className={styles.errorHeading}>
+                Houve um erro ao carregar os dados em JSON.
+              </h3>
 
-              <ul className={styles.ul}>
-                {tools &&
-                  tools["Front-End"].map((tool, index) => {
-                    const Icon = IconMap[tool.icon as IconKey];
+              <Button
+                onClick={() =>
+                  (window.location.href =
+                    "https://github.com/OscarDevv/portfolio-v2/issues")
+                }
+              >
+                Criar uma Issue
+              </Button>
+            </>
+          )}
 
-                    return (
-                      <li key={index}>
-                        <span className={styles.span}>{tool.name}</span>
-                        {Icon && <Icon style={{ color: tool.color }} />}
-                      </li>
-                    );
-                  })}
-              </ul>
-            </Container>
+          {tools && (
+            <div className={styles.div}>
+              <Container className={styles.toolColumn}>
+                <h2 className={styles.sectionTitle}>Front-End</h2>
 
-            <Container className={styles.toolColumn}>
-              <h2 className={styles.sectionTitle}>Ferramentas</h2>
+                <ul className={styles.ul}>
+                  {tools &&
+                    tools["Front-End"].map((tool, index) => {
+                      const Icon = IconMap[tool.icon as IconKey];
 
-              <ul className={styles.ul}>
-                {tools &&
-                  tools["Ferramentas"].map((tool, index) => {
-                    const Icon = IconMap[tool.icon as IconKey];
+                      return (
+                        <li key={index}>
+                          <span className={styles.span}>{tool.name}</span>
+                          {Icon && <Icon style={{ color: tool.color }} />}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </Container>
 
-                    return (
-                      <li key={index}>
-                        <span className={styles.span}>{tool.name}</span>
-                        {Icon && <Icon style={{ color: tool.color }} />}
-                      </li>
-                    );
-                  })}
-              </ul>
-            </Container>
+              <Container className={styles.toolColumn}>
+                <h2 className={styles.sectionTitle}>Ferramentas</h2>
 
-            <Container className={styles.toolColumn}>
-              <h2 className={styles.sectionTitle}>Em aprendizagem</h2>
+                <ul className={styles.ul}>
+                  {tools &&
+                    tools["Ferramentas"].map((tool, index) => {
+                      const Icon = IconMap[tool.icon as IconKey];
 
-              <ul className={styles.ul}>
-                {tools &&
-                  tools["Em Aprendizagem"].map((tool, index) => {
-                    const Icon = IconMap[tool.icon as IconKey];
+                      return (
+                        <li key={index}>
+                          <span className={styles.span}>{tool.name}</span>
+                          {Icon && <Icon style={{ color: tool.color }} />}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </Container>
 
-                    return (
-                      <li key={index}>
-                        <span className={styles.span}>{tool.name}</span>
-                        {Icon && <Icon style={{ color: tool.color }} />}
-                      </li>
-                    );
-                  })}
-              </ul>
-            </Container>
-          </div>
+              <Container className={styles.toolColumn}>
+                <h2 className={styles.sectionTitle}>Em aprendizagem</h2>
+
+                <ul className={styles.ul}>
+                  {tools &&
+                    tools["Em Aprendizagem"].map((tool, index) => {
+                      const Icon = IconMap[tool.icon as IconKey];
+
+                      return (
+                        <li key={index}>
+                          <span className={styles.span}>{tool.name}</span>
+                          {Icon && <Icon style={{ color: tool.color }} />}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </Container>
+            </div>
+          )}
         </section>
       </div>
     </>
