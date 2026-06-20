@@ -3,13 +3,14 @@
 .container {
   $bg-color: rgba($gold, 0.25);
 
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.25rem;
   background-color: $bg-color;
   background-image: radial-gradient(circle at center, $yellow, $bg-color);
   background-size: 400% 400%;
   background-position: 0 0;
-  border-radius: 999px;
+  border-radius: 1rem;
   border: 1px solid $gold;
+  min-width: 0;
   transition: all 0.5s;
 
   &:hover {

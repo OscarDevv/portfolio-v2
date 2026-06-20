@@ -1,63 +1,37 @@
+import { useEffect, useState } from "react";
 import pfp from "../../assets/images/Foto-Perfil.jpeg";
+import { Container } from "../../components/ui/Container";
 import { useScrambleText } from "../../hooks/useScrambleText";
 import styles from "./About.module.scss";
-import type { Language } from "./About.types";
-import {
-  SiGit,
-  SiJavascript,
-  SiReact,
-  SiSass,
-  SiTailwindcss,
-  SiTypescript,
-  SiVite,
-  SiVuedotjs,
-} from "react-icons/si";
+import { IconMap, type IconKey, type JSONResponse } from "./About.types";
 
 export const About = () => {
   const name = useScrambleText("OSCAR", 100);
+  const [tools, setTools] = useState<JSONResponse>();
 
-  const languages: Language[] = [
-    {
-      name: "React",
-      icon: SiReact,
-      color: "cyan",
-    },
-    {
-      name: "JavaScript",
-      icon: SiJavascript,
-      color: "yellow",
-    },
-    {
-      name: "TypeScript",
-      icon: SiTypescript,
-      color: "cyan",
-    },
-    {
-      name: "Git",
-      icon: SiGit,
-      color: "orange",
-    },
-    {
-      name: "Vite",
-      icon: SiVite,
-      color: "purple",
-    },
-    {
-      name: "SCSS",
-      icon: SiSass,
-      color: "pink",
-    },
-    {
-      name: "TailwindCSS",
-      icon: SiTailwindcss,
-      color: "cyan",
-    },
-    {
-      name: "Vue",
-      icon: SiVuedotjs,
-      color: "green",
-    },
-  ];
+  useEffect(() => {
+    const getDataFromJSON = async () => {
+      try {
+        const response: Response = await fetch("/tools.json");
+
+        if (!response.ok) {
+          throw new Error("Falha ao carregar a lista de habilidades em JSON.");
+        }
+
+        const data: JSONResponse = await response.json();
+
+        if (data) {
+          setTools(data);
+        }
+      } catch (error) {
+        throw new Error(`Houve um erro desconhecido ao carregar o JSON.`, {
+          cause: error,
+        });
+      }
+    };
+
+    getDataFromJSON();
+  }, []);
 
   return (
     <>
@@ -88,17 +62,63 @@ export const About = () => {
             Spring Boot no futuro.
           </p>
 
-          <ul>
-            {languages.map((lang, index) => {
-              const Icon = lang.icon;
+          <h2>Tecnologias</h2>
 
-              return (
-                <li key={index}>
-                  <Icon style={{ color: lang.color }} />
-                </li>
-              );
-            })}
-          </ul>
+          <div className={styles.div}>
+            <Container className={styles.toolColumn}>
+              <h2 className={styles.sectionTitle}>Front-End</h2>
+
+              <ul className={styles.ul}>
+                {tools &&
+                  tools["Front-End"].map((tool, index) => {
+                    const Icon = IconMap[tool.icon as IconKey];
+
+                    return (
+                      <li key={index}>
+                        <span className={styles.span}>{tool.name}</span>
+                        {Icon && <Icon style={{ color: tool.color }} />}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </Container>
+
+            <Container className={styles.toolColumn}>
+              <h2 className={styles.sectionTitle}>Ferramentas</h2>
+
+              <ul className={styles.ul}>
+                {tools &&
+                  tools["Ferramentas"].map((tool, index) => {
+                    const Icon = IconMap[tool.icon as IconKey];
+
+                    return (
+                      <li key={index}>
+                        <span className={styles.span}>{tool.name}</span>
+                        {Icon && <Icon style={{ color: tool.color }} />}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </Container>
+
+            <Container className={styles.toolColumn}>
+              <h2 className={styles.sectionTitle}>Em aprendizagem</h2>
+
+              <ul className={styles.ul}>
+                {tools &&
+                  tools["Em Aprendizagem"].map((tool, index) => {
+                    const Icon = IconMap[tool.icon as IconKey];
+
+                    return (
+                      <li key={index}>
+                        <span className={styles.span}>{tool.name}</span>
+                        {Icon && <Icon style={{ color: tool.color }} />}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </Container>
+          </div>
         </section>
       </div>
     </>

@@ -36,7 +36,68 @@
 
 .content {
   line-height: 135%;
+  margin-bottom: 1.5rem;
+}
+
+.div {
+  margin-top: 1.5rem;
+}
+
+.toolColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.75rem;
+  color: $white;
+  font-size: 1.1rem;
+}
+
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    background: rgba($dark, 0.4);
+    border: 1px solid rgba($gold, 0.3);
+    color: $white;
+    font-size: 1.15rem;
+
+    &:hover .span {
+      opacity: 1;
+      bottom: 110%;
+    }
+  }
+}
+
+.span {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  opacity: 0;
+  background: rgba($gold, 0.5);
+  padding: 0.25rem 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  transition: all 0.2s;
 }
 
 @media (max-width: 950px) {
