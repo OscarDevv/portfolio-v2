@@ -3,7 +3,8 @@ import pfp from "../../assets/images/Foto-Perfil.jpeg";
 import { Container } from "../../components/ui/Container";
 import { useScrambleText } from "../../hooks/useScrambleText";
 import styles from "./About.module.scss";
-import { IconMap, type IconKey, type JSONResponse } from "./About.types";
+import type { JSONResponse } from "./About.types";
+import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
 import { Button } from "../../components/ui/Button";
 
 export default function About() {
@@ -90,7 +91,7 @@ export default function About() {
                 <ul className={styles.ul}>
                   {tools &&
                     tools["Front-End"].map((tool, index) => {
-                      const Icon = IconMap[tool.icon as IconKey];
+                      const Icon = ToolsIcons[tool.icon as IconKey];
 
                       return (
                         <li key={index}>
@@ -108,7 +109,7 @@ export default function About() {
                 <ul className={styles.ul}>
                   {tools &&
                     tools["Ferramentas"].map((tool, index) => {
-                      const Icon = IconMap[tool.icon as IconKey];
+                      const Icon = ToolsIcons[tool.icon as IconKey];
 
                       return (
                         <li key={index}>
@@ -126,7 +127,7 @@ export default function About() {
                 <ul className={styles.ul}>
                   {tools &&
                     tools["Em Aprendizagem"].map((tool, index) => {
-                      const Icon = IconMap[tool.icon as IconKey];
+                      const Icon = ToolsIcons[tool.icon as IconKey];
 
                       return (
                         <li key={index}>
