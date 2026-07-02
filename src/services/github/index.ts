@@ -1,17 +1,17 @@
 import type { Languages, Repository } from "../../types/githubData";
 
-const key = "https://api.github.com/repos/oscardevv";
-const mergeKey = (suffix: string): string => `${key}/${suffix}`;
+const repositoryUrl = (suffix: string): string =>
+  `https://api.github.com/repos/oscardevv/${suffix}`;
 
 export const getRepo = async (
   repoName: string,
 ): Promise<Repository | undefined> => {
   try {
     // REPOSITÓRIO
-    const repoResponse: Response = await fetch(mergeKey(repoName));
+    const repoResponse = await fetch(repositoryUrl(repoName));
     if (!repoResponse.ok)
       throw new Error(
-        `Erro ao buscar o repositório ${mergeKey(repoName)}. Status: ${repoResponse.status}`,
+        `Erro ao buscar o repositório ${repositoryUrl(repoName)}. Status: ${repoResponse.status}`,
       );
 
     const repoData: Repository = await repoResponse.json();
@@ -24,12 +24,10 @@ export const getRepo = async (
     const { name, html_url, description, pushed_at, homepage } = repoData;
 
     // LINGUAGENS
-    const langResponse: Response = await fetch(
-      mergeKey(`${repoName}/languages`),
-    );
+    const langResponse = await fetch(repositoryUrl(`${repoName}/languages`));
     if (!langResponse.ok)
       throw new Error(
-        `Erro ao buscar as linguagens do repositório ${mergeKey(repoName)}. Status: ${langResponse.status}`,
+        `Erro ao buscar as linguagens do repositório ${repositoryUrl(repoName)}. Status: ${langResponse.status}`,
       );
 
     const langData: Record<Languages, number> = await langResponse.json();
@@ -46,6 +44,28 @@ export const getRepo = async (
       homepage,
       languages: langData,
     };
+  } catch (error) {
+    throw new Error(`Erro desconhecido.`, { cause: error });
+  }
+};
+
+const allRepositoriesKey = "https://api.github.com/users/oscardevv/repos";
+
+export const getAllRepos = async (): Promise<string[]> => {
+  try {
+    const response = await fetch(allRepositoriesKey);
+    if (!response.ok)
+      throw new Error(
+        `Erro ao buscar todos os repositórios. Status: ${response.status}`,
+      );
+
+    const data: Repository[] = await response.json();
+    if (!Array.isArray(data) || data.length === 0)
+      throw new Error(
+        `Erro na resposta dos dados ou nenhuma resposta adquirida. Dados: ${JSON.stringify(data)}`,
+      );
+
+    return data.filter((repo) => !repo.private).map((repo) => repo.name);
   } catch (error) {
     throw new Error(`Erro desconhecido.`, { cause: error });
   }
