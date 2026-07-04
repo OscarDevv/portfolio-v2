@@ -1,37 +1,48 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { getRepo } from "../../services/github";
+import { useEffect, useState } from "react";
 import type { Repository } from "../../types/githubData";
+import { GetAllRepos } from "../../services/github";
 
 export default function Projects() {
-  // Teste básico para ver se código está funcional
-  const [d, setD] = useState<Repository>();
+  const [repos, setRepos] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const data = async () => {
+    const applyData = async () => {
       try {
-        setD(await getRepo("blog"));
+        const repos = await GetAllRepos();
+
+        if (repos) {
+          setRepos(repos);
+        } else {
+          throw new Error(`Erro ao buscar os repositórios. Dados: ${repos}`);
+        }
       } catch (error) {
-        console.error(error);
+        setError(true);
+        throw new Error(`Erro ao fazer a requesição.`, { cause: error });
+      } finally {
+        setLoading(false);
       }
     };
 
-    data();
+    applyData();
   }, []);
-
-  let forD: ReactNode;
-
-  if (d?.languages) {
-    forD = Object.keys(d.languages).map((lang) => <p>{lang}</p>);
-  } else {
-    forD = "Hello World";
-  }
 
   return (
     <>
-      <p>{d?.description}</p>
-      <p>{d?.html_url}</p>
-      <p>{d?.pushed_at}</p>
-      {forD}
+      {loading && <p>Carregando</p>}
+      {repos.map((repo) => (
+        <div key={repo.name}>
+          <p>{repo.name}</p>
+          <p>{repo.description}</p>
+          {Object.keys(repo.languages).map((lang) => (
+            <p>
+              <b>{lang}</b>
+            </p>
+          ))}
+        </div>
+      ))}
+      {error && <p>Erro</p>}
     </>
   );
 }

@@ -1,72 +1,52 @@
 import type { Languages, Repository } from "../../types/githubData";
 
-const repositoryUrl = (suffix: string): string =>
-  `https://api.github.com/repos/oscardevv/${suffix}`;
+const reposListKey = "https://api.github.com/users/oscardevv/repos";
+const repoLanguagesListKey = (repo: string): string =>
+  `https://api.github.com/repos/oscardevv/${repo}/languages`;
 
-export const getRepo = async (
-  repoName: string,
-): Promise<Repository | undefined> => {
+export const GetAllRepos = async (): Promise<Repository[]> => {
   try {
-    // REPOSITÓRIO
-    const repoResponse = await fetch(repositoryUrl(repoName));
-    if (!repoResponse.ok)
+    const reposListRes = await fetch(reposListKey, {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+      },
+    });
+    if (!reposListRes.ok)
       throw new Error(
-        `Erro ao buscar o repositório ${repositoryUrl(repoName)}. Status: ${repoResponse.status}`,
+        `A response de lista de repositórios possui erros. Status: ${reposListRes.status}`,
       );
+    const reposList: Repository[] = await reposListRes.json();
 
-    const repoData: Repository = await repoResponse.json();
-    if (!repoData.html_url || !repoData.name)
-      throw new Error(
-        `Os dados obtidos não foram os esperados. Dados: ${JSON.stringify(repoData)}`,
-      );
-    if (repoData.private) return;
+    const repos = await Promise.all(
+      reposList
+        .filter(
+          (repo) => !repo.private && repo.name && repo.name !== "OscarDevv",
+        )
+        .map(async (repo) => {
+          const repoLanguagesRes = await fetch(
+            repoLanguagesListKey(repo.name),
+            {
+              headers: {
+                Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+              },
+            },
+          );
 
-    const { name, html_url, description, pushed_at, homepage } = repoData;
+          if (!repoLanguagesRes.ok)
+            throw new Error(`Erro ao buscar linguagens de ${repo.name}`);
 
-    // LINGUAGENS
-    const langResponse = await fetch(repositoryUrl(`${repoName}/languages`));
-    if (!langResponse.ok)
-      throw new Error(
-        `Erro ao buscar as linguagens do repositório ${repositoryUrl(repoName)}. Status: ${langResponse.status}`,
-      );
+          const languages: Record<Languages, number> =
+            await repoLanguagesRes.json();
 
-    const langData: Record<Languages, number> = await langResponse.json();
-    if (Object.keys(langData).length === 0)
-      throw new Error(
-        `Nenhuma linguagem apareceu nos dados. Dados: ${JSON.stringify(langData)}`,
-      );
+          return {
+            ...repo,
+            languages,
+          };
+        }),
+    );
 
-    return {
-      name,
-      html_url,
-      description,
-      pushed_at,
-      homepage,
-      languages: langData,
-    };
+    return repos;
   } catch (error) {
-    throw new Error(`Erro desconhecido.`, { cause: error });
-  }
-};
-
-const allRepositoriesKey = "https://api.github.com/users/oscardevv/repos";
-
-export const getAllRepos = async (): Promise<string[]> => {
-  try {
-    const response = await fetch(allRepositoriesKey);
-    if (!response.ok)
-      throw new Error(
-        `Erro ao buscar todos os repositórios. Status: ${response.status}`,
-      );
-
-    const data: Repository[] = await response.json();
-    if (!Array.isArray(data) || data.length === 0)
-      throw new Error(
-        `Erro na resposta dos dados ou nenhuma resposta adquirida. Dados: ${JSON.stringify(data)}`,
-      );
-
-    return data.filter((repo) => !repo.private).map((repo) => repo.name);
-  } catch (error) {
-    throw new Error(`Erro desconhecido.`, { cause: error });
+    throw new Error("Erro ao fazer a requesição.", { cause: error });
   }
 };
