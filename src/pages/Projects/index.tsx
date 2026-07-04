@@ -8,12 +8,27 @@ export default function Projects() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const cache = localStorage.getItem("repos-list-cache");
+    const dueDate = localStorage.getItem("repos-cache-due-date");
+    const now = Date.now();
+
     const applyData = async () => {
       try {
+        if (cache && dueDate && Number(dueDate) > now) {
+          setRepos(JSON.parse(cache));
+          setLoading(false);
+          return;
+        }
+
         const repos = await GetAllRepos();
 
         if (repos) {
           setRepos(repos);
+          localStorage.setItem("repos-list-cache", JSON.stringify(repos));
+          localStorage.setItem(
+            "repos-cache-due-date",
+            String(Date.now() + 600000),
+          );
         } else {
           throw new Error(`Erro ao buscar os repositórios. Dados: ${repos}`);
         }
