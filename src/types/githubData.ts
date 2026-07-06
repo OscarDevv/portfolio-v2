@@ -4,6 +4,7 @@ export type Languages =
   | "JavaScript"
   | "TypeScript"
   | "SASS"
+  | "SCSS"
   | "VueJS"
   | "Java";
 

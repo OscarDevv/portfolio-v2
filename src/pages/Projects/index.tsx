@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
-import type { Repository } from "../../types/githubData";
+import type { Languages, Repository } from "../../types/githubData";
 import { GetAllRepos } from "../../services/github";
+import styles from "./Projects.module.scss";
+import { Eye, Info } from "lucide-react";
+import { Container } from "../../components/ui/Container";
+import { Button } from "../../components/ui/Button";
+import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
+
+const languageIconMap: Partial<Record<Languages, IconKey>> = {
+  HTML: "SiHtml5",
+  CSS: "SiCss",
+  JavaScript: "SiJavascript",
+  TypeScript: "SiTypescript",
+  SCSS: "SiSass",
+  VueJS: "SiVuedotjs",
+  Java: "FaJava",
+};
 
 export default function Projects() {
   const [repos, setRepos] = useState<Repository[]>([]);
@@ -45,19 +60,82 @@ export default function Projects() {
 
   return (
     <>
-      {loading && <p>Carregando</p>}
-      {repos.map((repo) => (
-        <div key={repo.name}>
-          <p>{repo.name}</p>
-          <p>{repo.description}</p>
-          {Object.keys(repo.languages).map((lang) => (
-            <p>
-              <b>{lang}</b>
-            </p>
-          ))}
+      <Container>
+        <Info />
+        <p>
+          Nota: Todos os dados vem da API do GitHub, portanto, pode haver algum
+          problema ao buscar eles.
+        </p>
+      </Container>
+
+      {loading && <p className={styles.loading}>Carregando dados...</p>}
+
+      {error && (
+        <div className={styles.errorContainer}>
+          <p>Erro ao carregar os dados.</p>
+          <Button
+            onClick={() =>
+              (window.location.href =
+                "https://github.com/OscarDevv/portfolio-v2/issues")
+            }
+          >
+            Criar uma Issue
+          </Button>
         </div>
-      ))}
-      {error && <p>Erro</p>}
+      )}
+
+      {repos && (
+        <>
+          <div className={styles.reposContainer}>
+            {repos.map((repo, index) => (
+              <article className={styles.repo} key={index}>
+                <h2 className={styles.repoHeading}>{repo.name}</h2>
+                <p className={styles.repoDesc}>{repo.description}</p>
+
+                <ul className={styles.languageList}>
+                  {Object.keys(repo.languages).map((lang) => {
+                    const iconKey = languageIconMap[lang as Languages];
+                    const Icon = iconKey ? ToolsIcons[iconKey] : null;
+
+                    return (
+                      <li
+                        key={`${repo.name}-${lang}`}
+                        className={styles.languageItem}
+                      >
+                        <span className={styles.languageLabel}>{lang}</span>
+                        {Icon && <Icon />}
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className={styles.actionButtons}>
+                  <Button
+                    onClick={() => (window.location.href = repo.html_url)}
+                  >
+                    Ver repositório
+                  </Button>
+                  {repo.homepage && (
+                    <Button
+                      onClick={() => (window.location.href = repo.homepage)}
+                    >
+                      Ver página web
+                    </Button>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <a
+            href="https://github.com/OscarDevv?tab=repositories"
+            target="_blank"
+            className={styles.seeAll}
+          >
+            <Eye />
+            <span>Ver todos os repositórios</span>
+          </a>
+        </>
+      )}
     </>
   );
 }
