@@ -1,0 +1,111 @@
+@use "../../styles/variables" as *;
+
+.loading {
+  margin: 2rem 0;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+  width: fit-content;
+}
+
+.reposContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+}
+
+.repo {
+  width: 100%;
+  border: 1px solid $gold;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: linear-gradient(to right, rgba($gold, 0.2), rgba($yellow, 0.3));
+}
+
+.repoHeading,
+.repoDesc {
+  margin-bottom: 1rem;
+}
+
+.languageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.languageItem {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: rgba($dark, 0.4);
+  border: 1px solid rgba($gold, 0.3);
+  color: $white;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+
+  &:hover .languageLabel {
+    opacity: 1;
+    bottom: 110%;
+  }
+}
+
+.languageLabel {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  opacity: 0;
+  background: rgba($gold, 0.5);
+  padding: 0.25rem 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.seeAll {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $yellow;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $gold;
+  }
+
+  &:focus {
+    color: $white;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  button {
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 1050px) {
+  .reposContainer {
+    grid-template-columns: auto;
+    gap: 0px;
+  }
+}
