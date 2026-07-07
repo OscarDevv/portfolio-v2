@@ -87,43 +87,47 @@ export default function Projects() {
       {repos && (
         <>
           <div className={styles.reposContainer}>
-            {repos.map((repo, index) => (
-              <article className={styles.repo} key={index}>
-                <h2 className={styles.repoHeading}>{repo.name}</h2>
-                <p className={styles.repoDesc}>{repo.description}</p>
+            {repos.map((repo, index) => {
+              if (index > 12) return;
 
-                <ul className={styles.languageList}>
-                  {Object.keys(repo.languages).map((lang) => {
-                    const iconKey = languageIconMap[lang as Languages];
-                    const Icon = iconKey ? ToolsIcons[iconKey] : null;
+              return (
+                <article className={styles.repo} key={index}>
+                  <h2 className={styles.repoHeading}>{repo.name}</h2>
+                  <p className={styles.repoDesc}>{repo.description}</p>
 
-                    return (
-                      <li
-                        key={`${repo.name}-${lang}`}
-                        className={styles.languageItem}
-                      >
-                        <span className={styles.languageLabel}>{lang}</span>
-                        {Icon && <Icon />}
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className={styles.actionButtons}>
-                  <Button
-                    onClick={() => (window.location.href = repo.html_url)}
-                  >
-                    Ver repositório
-                  </Button>
-                  {repo.homepage && (
+                  <ul className={styles.languageList}>
+                    {Object.keys(repo.languages).map((lang) => {
+                      const iconKey = languageIconMap[lang as Languages];
+                      const Icon = iconKey ? ToolsIcons[iconKey] : null;
+
+                      return (
+                        <li
+                          key={`${repo.name}-${lang}`}
+                          className={styles.languageItem}
+                        >
+                          <span className={styles.languageLabel}>{lang}</span>
+                          {Icon && <Icon />}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <div className={styles.actionButtons}>
                     <Button
-                      onClick={() => (window.location.href = repo.homepage)}
+                      onClick={() => (window.location.href = repo.html_url)}
                     >
-                      Ver página web
+                      Ver repositório
                     </Button>
-                  )}
-                </div>
-              </article>
-            ))}
+                    {repo.homepage && (
+                      <Button
+                        onClick={() => (window.location.href = repo.homepage)}
+                      >
+                        Ver página web
+                      </Button>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <a
