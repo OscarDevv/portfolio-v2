@@ -1,6 +1,6 @@
 import { useWriteText } from "../../hooks/useWriteText";
 import styles from "./Home.module.scss";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {

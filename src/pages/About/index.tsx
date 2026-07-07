@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import pfp from "../../assets/images/Foto-Perfil.jpeg";
-import { Container } from "../../components/ui/Container";
+import { Container } from "../../components/Container";
 import { useScrambleText } from "../../hooks/useScrambleText";
 import styles from "./About.module.scss";
 import type { JSONResponse } from "./About.types";
 import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
-import { Button } from "../../components/ui/Button";
+import { Button } from "../../components/Button";
 
 export default function About() {
   const name = useScrambleText("OSCAR", 100);

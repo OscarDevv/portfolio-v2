@@ -3,8 +3,8 @@ import type { Languages, Repository } from "../../types/githubData";
 import { GetAllRepos } from "../../services/github";
 import styles from "./Projects.module.scss";
 import { Eye, Info } from "lucide-react";
-import { Container } from "../../components/ui/Container";
-import { Button } from "../../components/ui/Button";
+import { Container } from "../../components/Container";
+import { Button } from "../../components/Button";
 import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
 
 const languageIconMap: Partial<Record<Languages, IconKey>> = {
