@@ -6,8 +6,10 @@ import styles from "./About.module.scss";
 import type { JSONResponse } from "./About.types";
 import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
 import { Button } from "../../components/Button";
+import { useWriteText } from "../../hooks/useWriteText";
 
 export default function About() {
+  const aboutTitle = useWriteText("Sobre", 75);
   const name = useScrambleText("OSCAR", 100);
   const [tools, setTools] = useState<JSONResponse>();
 
@@ -50,6 +52,8 @@ export default function About() {
           <h1 className={styles.name}>{name}</h1>
         </section>
         <section className={styles.contentContainer}>
+          <h1 className={styles.heading}>{aboutTitle}</h1>
+
           <p className={styles.content}>
             Sou Oscar, um estudante apaixonado por tecnologia e desenvolvimento
             web.

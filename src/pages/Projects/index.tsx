@@ -6,6 +6,7 @@ import { Eye, Info } from "lucide-react";
 import { Container } from "../../components/Container";
 import { Button } from "../../components/Button";
 import { ToolsIcons, type IconKey } from "../../types/toolsIcons";
+import { useWriteText } from "../../hooks/useWriteText";
 
 const languageIconMap: Partial<Record<Languages, IconKey>> = {
   HTML: "SiHtml5",
@@ -18,6 +19,7 @@ const languageIconMap: Partial<Record<Languages, IconKey>> = {
 };
 
 export default function Projects() {
+  const projectsTitle = useWriteText("Projetos", 75);
   const [repos, setRepos] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -60,6 +62,8 @@ export default function Projects() {
 
   return (
     <>
+      <h1 className={styles.heading}>{projectsTitle}</h1>
+
       <Container>
         <Info />
         <p>
