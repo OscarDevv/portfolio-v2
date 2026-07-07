@@ -46,7 +46,7 @@ export default function About() {
             target="_blank"
             title="Navegar para a página do GitHub do Oscar"
           >
-            <img className={styles.pfp} src={pfp} alt="Imagem do " />
+            <img className={styles.pfp} src={pfp} alt="Imagem do Oscar" />
           </a>
 
           <h1 className={styles.name}>{name}</h1>
