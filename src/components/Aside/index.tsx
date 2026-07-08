@@ -3,7 +3,6 @@ import {
   House,
   CircleUserRound,
   FolderGit2,
-  Award,
 } from "lucide-react";
 import type { AsideItem } from "./Aside.types";
 import { useNavigate } from "react-router-dom";
@@ -25,11 +24,6 @@ export const Aside = () => {
       name: "Projetos",
       path: "/projects",
       icon: FolderGit2,
-    },
-    {
-      name: "Certificados",
-      path: "/certifications",
-      icon: Award,
     },
     {
       name: "Contato",
