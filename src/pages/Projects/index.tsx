@@ -62,7 +62,7 @@ export default function Projects() {
 
   return (
     <>
-      <h1 className={styles.heading}>{projectsTitle}</h1>
+      <h1 className="pageTitle">{projectsTitle}</h1>
 
       <Container>
         <Info />

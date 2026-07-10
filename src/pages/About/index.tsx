@@ -52,7 +52,7 @@ export default function About() {
           <h1 className={styles.name}>{name}</h1>
         </section>
         <section className={styles.contentContainer}>
-          <h1 className={styles.heading}>{aboutTitle}</h1>
+          <h1 className="pageTitle">{aboutTitle}</h1>
 
           <p className={styles.content}>
             Sou Oscar, um estudante apaixonado por tecnologia e desenvolvimento
