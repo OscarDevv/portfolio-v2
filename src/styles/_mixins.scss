@@ -2,7 +2,7 @@
 
 @mixin create-font($name, $weight) {
   @font-face {
-    font-family: capitalize($name);
+    font-family: "#{capitalize($name)}";
     src: url("../assets/fonts/#{$name}/#{$name}-#{$weight}.woff2")
       format("woff2");
     font-weight: $weight;
