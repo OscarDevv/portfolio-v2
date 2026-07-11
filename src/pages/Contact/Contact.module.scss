@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+
+    .icon {
+      font-size: 2rem;
+    }
+
+    .noLink {
+      margin-top: 1rem;
+    }
+  }
+}
