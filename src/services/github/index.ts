@@ -6,11 +6,7 @@ const repoLanguagesListKey = (repo: string): string =>
 
 export const GetAllRepos = async (): Promise<Repository[]> => {
   try {
-    const reposListRes = await fetch(reposListKey, {
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-      },
-    });
+    const reposListRes = await fetch(reposListKey);
     if (!reposListRes.ok)
       throw new Error(
         `A response de lista de repositórios possui erros. Status: ${reposListRes.status}`,
@@ -24,13 +20,7 @@ export const GetAllRepos = async (): Promise<Repository[]> => {
         )
         .map(async (repo) => {
           const repoLanguagesRes = await fetch(
-            repoLanguagesListKey(repo.name),
-            {
-              headers: {
-                Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-              },
-            },
-          );
+            repoLanguagesListKey(repo.name));
 
           if (!repoLanguagesRes.ok)
             throw new Error(`Erro ao buscar linguagens de ${repo.name}`);
