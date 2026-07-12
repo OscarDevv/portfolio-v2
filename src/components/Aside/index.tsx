@@ -46,6 +46,7 @@ export const Aside = () => {
                 key={index}
                 className={styles.li}
                 onClick={() => navigate(item.path)}
+                tabIndex={index + 1}
               >
                 <Icon className={styles.icon} />
                 <span className={styles.span}>{item.name}</span>

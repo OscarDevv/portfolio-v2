@@ -23,7 +23,7 @@
   position: relative;
   cursor: pointer;
 
-  &:hover {
+  &:hover, &:focus {
     .icon {
       transform: scale(1.25);
     }
@@ -32,6 +32,10 @@
       opacity: 1;
       right: 125%;
       pointer-events: all;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }
