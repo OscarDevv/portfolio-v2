@@ -15,7 +15,8 @@
     box-shadow 0.3s,
     transform 0.2s;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     box-shadow:
       -5px -5px 25px $gold,
       5px -5px 25px $gold,

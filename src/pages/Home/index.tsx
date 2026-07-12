@@ -25,8 +25,12 @@ export default function Home() {
       </h2>
 
       <div className={styles.buttonContainer}>
-        <Button tabIndex={5} onClick={() => navigate("/projects")}>Ver projetos</Button>
-        <Button tabIndex={6} onClick={() => navigate("/contact")}>Contato</Button>
+        <Button tabIndex={5} onClick={() => navigate("/projects")}>
+          Ver projetos
+        </Button>
+        <Button tabIndex={6} onClick={() => navigate("/contact")}>
+          Contato
+        </Button>
       </div>
     </>
   );

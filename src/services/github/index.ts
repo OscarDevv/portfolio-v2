@@ -19,8 +19,7 @@ export const GetAllRepos = async (): Promise<Repository[]> => {
           (repo) => !repo.private && repo.name && repo.name !== "OscarDevv",
         )
         .map(async (repo) => {
-          const repoLanguagesRes = await fetch(
-            repoLanguagesListKey(repo.name));
+          const repoLanguagesRes = await fetch(repoLanguagesListKey(repo.name));
 
           if (!repoLanguagesRes.ok)
             throw new Error(`Erro ao buscar linguagens de ${repo.name}`);

@@ -110,7 +110,9 @@ export default function Projects() {
                           className={styles.languageItem}
                         >
                           <span className={styles.languageLabel}>{lang}</span>
-                          {Icon && <Icon aria-hidden="true" focusable="false" />}
+                          {Icon && (
+                            <Icon aria-hidden="true" focusable="false" />
+                          )}
                         </li>
                       );
                     })}

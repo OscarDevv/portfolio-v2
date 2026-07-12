@@ -23,7 +23,8 @@
   position: relative;
   cursor: pointer;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     .icon {
       transform: scale(1.25);
     }
