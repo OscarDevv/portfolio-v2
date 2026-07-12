@@ -110,7 +110,7 @@ export default function Projects() {
                           className={styles.languageItem}
                         >
                           <span className={styles.languageLabel}>{lang}</span>
-                          {Icon && <Icon />}
+                          {Icon && <Icon aria-hidden="true" focusable="false" />}
                         </li>
                       );
                     })}
@@ -139,7 +139,7 @@ export default function Projects() {
             target="_blank"
             className={styles.seeAll}
           >
-            <Eye />
+            <Eye aria-hidden="false" focusable="true" />
             <span>Ver todos os repositórios</span>
           </a>
         </>

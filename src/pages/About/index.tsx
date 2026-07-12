@@ -100,7 +100,7 @@ export default function About() {
                       return (
                         <li key={index}>
                           <span className={styles.span}>{tool.name}</span>
-                          {Icon && <Icon style={{ color: tool.color }} />}
+                          {Icon && <Icon aria-hidden="true" focusable="false" style={{ color: tool.color }} />}
                         </li>
                       );
                     })}
@@ -117,9 +117,9 @@ export default function About() {
 
                       return (
                         <li key={index}>
-                          <span className={styles.span}>{tool.name}</span>
-                          {Icon && <Icon style={{ color: tool.color }} />}
-                        </li>
+                        <span className={styles.span}>{tool.name}</span>
+                        {Icon && <Icon aria-hidden="true" focusable="false" style={{ color: tool.color }} />}
+                      </li>
                       );
                     })}
                 </ul>
@@ -135,9 +135,9 @@ export default function About() {
 
                       return (
                         <li key={index}>
-                          <span className={styles.span}>{tool.name}</span>
-                          {Icon && <Icon style={{ color: tool.color }} />}
-                        </li>
+                        <span className={styles.span}>{tool.name}</span>
+                        {Icon && <Icon aria-hidden="true" focusable="false" style={{ color: tool.color }} />}
+                      </li>
                       );
                     })}
                 </ul>

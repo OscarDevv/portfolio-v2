@@ -38,7 +38,7 @@ export default function Contact() {
 
           return (
             <Container key={way.name}>
-              <Icon className={styles.icon} />
+              <Icon aria-hidden="true" focusable="false" className={styles.icon} />
               <h2>{way.name}</h2>
               <span>{way.content}</span>
               {way.link && (
